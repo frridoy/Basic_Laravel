@@ -13,5 +13,6 @@ Route::get('/',[HomeController::class,'home']);
 
 
 //
-Route::get('add-student',[StudentController::class, 'create'])->name('students.create');
-Route::post('store-student',[StudentController::class, 'store'])->name('students.store');
+Route::get('add-students',[StudentController::class, 'create'])->name('students.create');
+Route::get('view-students',[StudentController::class, 'list'])->name('students.list');
+Route::post('store-students',[StudentController::class, 'store'])->name('students.store');

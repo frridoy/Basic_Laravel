@@ -42,4 +42,9 @@ class StudentController extends Controller
     return redirect()->back();
     }
 
+    public function list(){
+        $students = Student::all();
+        return view('student.list', compact('students'));
+    }
+
 }
