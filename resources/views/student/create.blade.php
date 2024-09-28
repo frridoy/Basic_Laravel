@@ -42,6 +42,10 @@
         .form-control {
             border-radius: 5px;
         }
+        .invalid-feedback {
+            color: red;
+            font-size: 0.875em;
+        }
     </style>
 </head>
 <body>
@@ -52,30 +56,47 @@
         @csrf
         <div class="form-group">
             <label for="studentName">Student Name</label>
-            <input type="text" name="studentName" class="form-control" id="studentName" placeholder="Enter student name" required>
+            <input type="text" name="studentName" value="{{old('studentName')}}" class="form-control @error('studentName') is-invalid @enderror" id="studentName" placeholder="Enter student name" >
+            @error('studentName')
+            <p class="invalid-feedback">{{ $message }}</p>
+        @enderror
         </div>
         <div class="form-group">
             <label for="studentEmail">Student Email</label>
-            <input type="email" name="studentEmail" class="form-control" id="studentEmail" placeholder="Enter student email" required>
+            <input type="string" name="studentEmail"  value="{{old('studentEmail')}}" class="form-control @error('studentEmail') is-invalid @enderror" id="studentEmail" placeholder="Enter student email" >
+            @error('studentEmail')
+                <p class="invalid-feedback">{{$message}}</p>
+            @enderror
+
         </div>
+
         <div class="form-group">
             <label for="studentRelation">Relation with Student</label>
-            <select class="form-control" name="studentRelation" id="studentRelation"  required>
-                <option value="" disabled selected>Select relation</option>
-                <option value="Father">Father</option>
-                <option value="Mother">Mother</option>
-                <option value="Brother">Brother</option>
-                <option value="Sister">Sister</option>
-                <option value="Others">Others</option>
+            <select class="form-control @error('studentRelation') is-invalid @enderror" name="studentRelation" id="studentRelation">
+                <option value="" disabled {{ old('studentRelation') ? '' : 'selected' }}>Select relation</option>
+                <option value="Father" {{ old('studentRelation') == 'Father' ? 'selected' : '' }}>Father</option>
+                <option value="Mother" {{ old('studentRelation') == 'Mother' ? 'selected' : '' }}>Mother</option>
+                <option value="Brother" {{ old('studentRelation') == 'Brother' ? 'selected' : '' }}>Brother</option>
+                <option value="Sister" {{ old('studentRelation') == 'Sister' ? 'selected' : '' }}>Sister</option>
+                <option value="Others" {{ old('studentRelation') == 'Others' ? 'selected' : '' }}>Others</option>
             </select>
+            @error('studentRelation')
+                <p class="invalid-feedback">{{ $message }}</p>
+            @enderror
         </div>
+
+
         <div class="form-group">
             <label for="guardianPhone">Guardian's Phone Number</label>
-            <input type="text" name="guardianPhone" class="form-control" id="guardianPhone" placeholder="Enter guardian's phone number" required>
+            <input type="text" name="guardianPhone" value="{{old('guardianPhone')}}" class="form-control @error('guardianPhone') is-invalid @enderror" id="guardianPhone" placeholder="Enter guardian's phone number" >
+            @error('guardianPhone')
+                <p class="invalid-feedback">{{ $message }}</p>
+            @enderror
         </div>
         <div class="form-group">
             <label for="studentAddress">Address</label>
-            <textarea class="form-control" name="studentAddress" id="studentAddress" rows="3" placeholder="Enter address" required></textarea>
+            <textarea class="form-control" name="studentAddress" id="studentAddress" rows="3" placeholder="Enter address" ></textarea>
+
         </div>
         <button type="submit" class="btn btn-primary btn-block">Add Student</button>
     </form>
