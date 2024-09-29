@@ -57,6 +57,7 @@
                 <thead class="table-dark">
                     <tr>
 
+                        <th>SI</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Guardian Relation</th>
@@ -68,6 +69,7 @@
                 <tbody>
                     @foreach ($students as $student)
                         <tr>
+                            <td>{{$student->id}}</td>
                             <td>{{$student->name}}</td>
                             <td>{{$student->email}}</td>
                             <td>{{$student->student_relation}}</td>
@@ -76,7 +78,8 @@
                                 {{ $student['address'] ?? 'N/A' }}
                             </td>
                             <td>
-                               <a href="{{route('students.destroy', $student->id)}}">Delete</a>
+                               <a href="{{route('students.edit', $student->id)}}" class="btn btn-warning">Edit</a>
+                               <a href="{{route('students.destroy', $student->id)}}" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     @endforeach

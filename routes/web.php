@@ -19,3 +19,12 @@ Route::post('store-students',[StudentController::class, 'store'])->name('student
 
 //delete
 Route::get('destroy-students/{stu_id}',[StudentController::class, 'destroy'])->name('students.destroy');
+
+//edit
+Route::get('edit-students/{stu_id}',[StudentController::class, 'edit'])->name('students.edit');
+
+//update
+Route::put('update-students/{stu_id}',[StudentController::class, 'update'])->name('students.update');
+
+
+
