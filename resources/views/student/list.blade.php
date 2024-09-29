@@ -45,6 +45,8 @@
     <div class="container">
         <h3 class="text-center mb-4">Student Information</h3>
 
+        @include('message')
+
         <div class="text-center mt-4 mb-2">
             <a href="{{ route('students.create') }}" class="btn btn-primary" onclick="return confirm('Do you want to add a new student?');">
                 <i class="fas fa-plus"></i> Add New Student

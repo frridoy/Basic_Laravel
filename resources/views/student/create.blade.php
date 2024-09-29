@@ -52,6 +52,11 @@
 
 <div class="container form-container">
     <h2>Add New Student</h2>
+
+
+    @include('message')
+
+
     <form action="{{route('students.store')}}" method="POST">
         @csrf
         <div class="form-group">

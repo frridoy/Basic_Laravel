@@ -51,6 +51,7 @@
 
 <div class="container form-container">
     <h2>Edit Student Info</h2>
+    @include('message')
     <form action="{{ route('students.update', $student->id) }}" method="POST">
         @csrf
         @method('PUT')

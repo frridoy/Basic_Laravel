@@ -41,7 +41,7 @@ class StudentController extends Controller
 
         $student->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Student Added Successfully');
     }
 
     public function list()
@@ -56,7 +56,11 @@ class StudentController extends Controller
         $student = Student::find($id);
         if ($student) {
             $student->delete();
-            return redirect()->back();
+            return redirect()->back()->with('error', 'Student Deleted Successfully');
+        }
+
+        if(!$student){
+            return redirect()->back()->with('error', 'No Student Info. Found!');
         }
     }
 
@@ -64,12 +68,23 @@ class StudentController extends Controller
     public function edit($id)
     {
         $student = Student::find($id);
+
+        if(!$student){
+            return redirect()->back()->with('error', 'No Student Info. Found!');
+        }
+
         return view('student.edit', compact('student'));
     }
 
 
     public function update(Request $request, $id)
     {
+
+        $student = Student::find($id);
+
+        if(!$student){
+            return redirect()->back()->with('error', 'No Student Info. Found!');
+        }
 
 
         $validator = Validator::make($request->all(), [
@@ -85,7 +100,6 @@ class StudentController extends Controller
         }
 
 
-        $student = Student::findOrFail($id);
         $student->name = $request->studentName;
         $student->email = $request->studentEmail;
         $student->student_relation = $request->studentRelation;
@@ -94,6 +108,6 @@ class StudentController extends Controller
 
         $student->save();
 
-        return redirect()->route('students.list');
+        return redirect()->route('students.list')->with('success', 'Student Info. Updated Successfully');
     }
 }
