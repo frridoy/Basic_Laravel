@@ -47,4 +47,14 @@ class StudentController extends Controller
         return view('student.list', compact('students'));
     }
 
+    public function destroy($id){
+
+        $student=Student::find($id);
+            if($student){
+                $student->delete();
+            }
+            return redirect()->back();
+        }
+
+
 }

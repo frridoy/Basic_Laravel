@@ -76,7 +76,7 @@
                                 {{ $student['address'] ?? 'N/A' }}
                             </td>
                             <td>
-                               ----
+                               <a href="{{route('students.destroy', $student->id)}}">Delete</a>
                             </td>
                         </tr>
                     @endforeach
