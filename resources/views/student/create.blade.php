@@ -57,7 +57,7 @@
     @include('message')
 
 
-    <form action="{{route('students.store')}}" method="POST">
+    <form action="{{route('students.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="studentName">Student Name</label>
@@ -103,6 +103,12 @@
             <textarea class="form-control" name="studentAddress" id="studentAddress" rows="3" placeholder="Enter address" ></textarea>
 
         </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Image:</label>
+            <input type="file" class="form-control" id="image" name="image">
+        </div>
+
         <button type="submit" class="btn btn-primary btn-block">Add Student</button>
     </form>
 </div>

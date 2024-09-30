@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
@@ -32,6 +33,20 @@ class StudentController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
 
+        //image upload
+
+        $fileName = null;
+        $path = null;
+
+
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $fileName = time() . '.' . $extension;
+            $path = '/uploads/students/';
+            $file->move(public_path($path), $fileName);
+        }
+
         $student = new Student();
         $student->name = $request->studentName;
         $student->email = $request->studentEmail;
@@ -39,10 +54,13 @@ class StudentController extends Controller
         $student->guardian_phone_number = $request->guardianPhone;
         $student->address = $request->studentAddress;
 
+        $student->image = $path . $fileName; //show the image path and filename
+
         $student->save();
 
         return redirect()->back()->with('success', 'Student Added Successfully');
     }
+
 
     public function list()
     {
@@ -59,7 +77,7 @@ class StudentController extends Controller
             return redirect()->back()->with('error', 'Student Deleted Successfully');
         }
 
-        if(!$student){
+        if (!$student) {
             return redirect()->back()->with('error', 'No Student Info. Found!');
         }
     }
@@ -69,7 +87,7 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
 
-        if(!$student){
+        if (!$student) {
             return redirect()->back()->with('error', 'No Student Info. Found!');
         }
 
@@ -82,7 +100,7 @@ class StudentController extends Controller
 
         $student = Student::find($id);
 
-        if(!$student){
+        if (!$student) {
             return redirect()->back()->with('error', 'No Student Info. Found!');
         }
 

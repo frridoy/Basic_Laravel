@@ -65,6 +65,7 @@
                         <th>Guardian Relation</th>
                         <th>Guardian Number</th>
                         <th>Address</th>
+                        <th>Image</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -79,6 +80,14 @@
                             <td>
                                 {{ $student['address'] ?? 'N/A' }}
                             </td>
+                            <td>
+                                @if($student->image)
+                                    <img src="{{ asset($student->image) }}" alt="Student Image" style="width: 75px; height: auto;">
+                                @else
+                                    <span>No Image</span>
+                                @endif
+                            </td>
+
                             <td>
                                <a href="{{route('students.edit', $student->id)}}" class="btn btn-warning">Edit</a>
                                <a href="{{route('students.destroy', $student->id)}}" class="btn btn-danger">Delete</a>
